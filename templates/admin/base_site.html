@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+
+{% block extrastyle %}
+<style>
+    #header, div.breadcrumbs, div.selector-chosen h2, .module caption, .module h2, .object-tools a.addlink, .submit-row input, .submit-row input.default, .object-tools a:visited, .object-tools a:link {
+                background-color: #198754;
+                text-color: white;
+    }
+    a {
+          text-decoration: none;
+      }
+
+      body {
+              background-color: #b6fcd5;
+    }
+</style>
+{% endblock %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

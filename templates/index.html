@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1>{{ title }}</h1>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col dropdown">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tr><td>Выберите разрешение экрана: </td><td>{{ form.disp }}</td></tr>
+                        <tr><td>Выберите тип экрана: </td><td>{{ form.disp_type }}</td></tr>
+                        <tr><td>Выберите процессор: </td><td>{{ form.proc }}</td></tr>
+                        <tr><td>Выберите количество ядер процессора: </td><td>{{ form.core }}</td></tr>
+                        <tr><td>Выберите максимальную тактовую частоту процессора: </td><td>{{ form.freq }}</td></tr>
+                        <tr><td>Выберите видеокарту: </td><td>{{ form.gc }}</td></tr>
+                        <tr><td>Выберите объём оперативной памяти: </td><td>{{ form.r_a_m }}</td></tr>
+                        <tr><td>Выберите объём памяти жёсткого диска: </td><td>{{ form.hd }}</td></tr>
+                        <tr><td>Выберите объём кэш-памяти: </td><td>{{ form.cm }}</td></tr>
+                        <tr><td>Выберите операционную систему: </td><td>{{ form.o_s }}</td></tr>
+                        <tr><td><button class="btn btn-success" type="submit">Узнать стоимость</button></td><td><p>Для зарегистрированных пользователей цена определяется с учётом 7%-й скидки!</p></td></tr>
+                    </table>
+                    </div>
+                </form>
+                {% if price %}
+                <p><strong>Цена ноутбука составит {{ price }} ₽.</strong></p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item>
+                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button text-bg-success p-3" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                О сайте:
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <strong>Данный сайт является проектом по расчёту стоимости.</strong>
+                                В основе расчёта стоимости ноутбуков по выбранным параметрам лежит работа двух моделей нейронных сетей, средняя арифметическая оценка которых выводится в итоговой цене.
+                                Обе модели представляют собой решение задачи множественной линейной регрессии в определении цены ноутбука по ряду его характеристик.
+                                Для создания обучающей выборки были использованы данные сайта <a href="https://msk.pulscen.ru/">www.msk.pulscen.ru</a>.
+                                Первая модель разработана с помощью библиотеки TensorFlow, вторая - на основе фреймворка PyTorch.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}

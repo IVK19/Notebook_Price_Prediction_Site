@@ -1,0 +1,325 @@
+{% extends 'base.html' %}
+{% block scripts %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Параметры", "Количество запросов", { role: "style" }],
+        {% for screen in list_screens %}
+        ["{{ screen.0 }}", {{ screen.1 }}, "{{ screen.2 }}"],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Дисплеи",
+        width: 1160,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("display"));
+      chart.draw(view, options);
+  }
+</script>
+<script type="text/javascript">
+google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Параметры", "Количество запросов", { role: "style" }],
+        {% for screen in list_screens_type %}
+        ["{{ screen.0 }}", {{ screen.1 }}, "{{ screen.2 }}"],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Типы экранов",
+        width: 1160,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("display_type"));
+      chart.draw(view, options);
+  }
+</script>
+<script type="text/javascript">
+google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Параметры", "Количество запросов", { role: "style" }],
+        {% for pr in list_prs %}
+        ["{{ pr.0 }}", {{ pr.1 }}, "{{ pr.2 }}"],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Процессоры",
+        width: 1160,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("processor"));
+      chart.draw(view, options);
+  }
+</script>
+<script type="text/javascript">
+google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Параметры", "Количество запросов", { role: "style" }],
+        {% for cr in list_crs %}
+        ["{{ cr.0 }}", {{ cr.1 }}, "{{ cr.2 }}"],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Ядра процессоров",
+        width: 1160,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("cores"));
+      chart.draw(view, options);
+  }
+</script>
+<script type="text/javascript">
+google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Параметры", "Количество запросов", { role: "style" }],
+        {% for fr in list_frs %}
+        ["{{ fr.0 }}", {{ fr.1 }}, "{{ fr.2 }}"],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Максимальная тактовая частота процессоров",
+        width: 1160,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("frequency"));
+      chart.draw(view, options);
+  }
+</script>
+<script type="text/javascript">
+google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Параметры", "Количество запросов", { role: "style" }],
+        {% for gr in list_grs %}
+        ["{{ gr.0 }}", {{ gr.1 }}, "{{ gr.2 }}"],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Видеокарты",
+        width: 1160,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("graphics_cards"));
+      chart.draw(view, options);
+  }
+</script>
+<script type="text/javascript">
+google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Параметры", "Количество запросов", { role: "style" }],
+        {% for rm in list_rms %}
+        ["{{ rm.0 }}", {{ rm.1 }}, "{{ rm.2 }}"],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Оперативная память",
+        width: 1160,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("ram"));
+      chart.draw(view, options);
+  }
+</script>
+<script type="text/javascript">
+google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Параметры", "Количество запросов", { role: "style" }],
+        {% for hrd in list_hrds %}
+        ["{{ hrd.0 }}", {{ hrd.1 }}, "{{ hrd.2 }}"],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Память жёстких дисков",
+        width: 1160,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("hard_disks"));
+      chart.draw(view, options);
+  }
+</script>
+<script type="text/javascript">
+google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Параметры", "Количество запросов", { role: "style" }],
+        {% for cache in list_caches %}
+        ["{{ cache.0 }}", {{ cache.1 }}, "{{ cache.2 }}"],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Кэш-память",
+        width: 1160,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("cache_memory"));
+      chart.draw(view, options);
+  }
+</script>
+<script type="text/javascript">
+google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Параметры", "Количество запросов", { role: "style" }],
+        {% for osy in list_osys %}
+        ["{{ osy.0 }}", {{ osy.1 }}, "{{ osy.2 }}"],
+        {% endfor %}
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Операционные системы",
+        width: 1160,
+        height: 500,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("os"));
+      chart.draw(view, options);
+  }
+</script>
+{% endblock %}
+{% block content %}
+<main role="main" class="mt-3 flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1>{{ title }}</h1>
+                <div id="display" style="width: 1160px; height: 500px;"></div>
+                <div id="display_type" style="width: 1160px; height: 500px;"></div>
+                <div id="processor" style="width: 1160px; height: 500px;"></div>
+                <div id="cores" style="width: 1160px; height: 500px;"></div>
+                <div id="frequency" style="width: 1160px; height: 500px;"></div>
+                <div id="graphics_cards" style="width: 1160px; height: 500px;"></div>
+                <div id="ram" style="width: 1160px; height: 500px;"></div>
+                <div id="hard_disks" style="width: 1160px; height: 500px;"></div>
+                <div id="cache_memory" style="width: 1160px; height: 500px;"></div>
+                <div id="os" style="width: 1160px; height: 500px;"></div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

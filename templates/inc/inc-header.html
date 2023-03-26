@@ -1,0 +1,18 @@
+{% load static %}
+<header>
+    <nav class="navbar navbar-fixed-top">
+      <div class="btn-group container-fluid" role="group" aria-label="Basic example">
+        <a class="navbar-brand badge bg-success"><img src="{% static 'images/bg1.png' %}" width="32" height="32" alt=""><strong>Notebook Price Predictor</strong></a>
+        <a href="{% url 'home' %}" class="btn btn-success"><i class="fa-solid fa-house"><strong>Домашняя страница</strong></i></a>
+        <a href="{% url 'notebooks-list' %}" class="btn btn-success"><i class="fa-solid fa-sliders"><strong>Параметры, выбранные пользвателями</strong></i></a>
+        <a href="{% url 'statistics' %}" class="btn btn-success"><i class="fa-solid fa-chart-column"><strong>Статистика</strong></i></a>
+          {% if request.user.is_authenticated %}
+          <a class="btn btn-success"><strong>Здравствуйте, {{ request.user.username }}!</strong></a>
+          <a href="{% url 'logout' %}" class="btn btn-success"><i class="fa-solid fa-door-open"><strong>Выйти</strong></i></a>
+          {% else %}
+        <a href="{% url 'login' %}" class="btn btn-success"><i class="fa-solid fa-user-check"><strong>Авторизация</strong></i></a>
+        <a href="{% url 'registration' %}" class="btn btn-success"><i class="fa-solid fa-user-plus"><strong>Регистрация</strong></i></a>
+          {% endif %}
+      </div>
+    </nav>
+</header>
