@@ -5,10 +5,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from MainApp.forms import AddNotebookForm, LoginUserForm, RegistrationUserForm
-import tensorflow as tf
-from tensorflow import keras
 import torch
-from utils import random_color_string_generator, get_array
+from utils import random_color_string_generator, get_array, proc_dict
 from .models import *
 
 def index_page(request):
@@ -23,16 +21,17 @@ def index_page(request):
         form = AddNotebookForm(request.POST)
         if form.is_valid():
             notebook = form.save(commit=False)
+            notebook.core = Cores.objects.get(cores=proc_dict[str(notebook.proc)][0])
+            notebook.freq = Frequency.objects.get(frequency=proc_dict[str(notebook.proc)][1])
+            notebook.cm = CacheMemory.objects.get(cache_memory=proc_dict[str(notebook.proc)][2])
             arr = get_array(notebook)
-            npp_model4 = keras.models.load_model('npp_model_4_1')
             npp_model5 = torch.jit.load('model5_1_scripted.pt')
             npp_model5.eval()
             if request.user.is_authenticated:
-                price = int((((int(npp_model4(tf.cast(arr, dtype=float)).numpy()[0][0]) // 1000) * 1000 + (
-                            int(npp_model5(torch.from_numpy(arr).type(torch.FloatTensor)).item()) // 1000) * 1000) // 2) * 0.93)
+                price = (((int(npp_model5(torch.from_numpy(arr).type(torch.FloatTensor)).item()) // 1000)) * 1000) * 0.93
                 notebook.discount = 1
             else:
-                price = ((int(npp_model4(tf.cast(arr, dtype=float)).numpy()[0][0]) // 1000) * 1000 + (int(npp_model5(torch.from_numpy(arr).type(torch.FloatTensor)).item()) // 1000) * 1000) // 2
+                price = ((int(npp_model5(torch.from_numpy(arr).type(torch.FloatTensor)).item()) // 1000)) * 1000
             notebook.price = price
             notebook.save()
             context = {

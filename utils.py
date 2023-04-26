@@ -7,6 +7,7 @@ dt = {'LTPS': 4, 'TFT': 3, 'IPS': 3, 'IPS-level': 3, 'AHVA': 2, 'TN': 1}
 pn = {'Intel': 2, 'AMD': 1}
 pc = {'Core i9': 9, 'Core i7': 8, 'Core i5': 7, 'Ryzen 7': 6, 'Ryzen 5': 5, 'Ryzen 3': 4, 'Core i3': 3, 'Pentium': 2, 'Celeron': 1}
 os = {'MacOS': 7, 'Windows 11 Pro 64': 6, 'Windows 11 Pro': 6, 'Windows 11 Домашняя 64': 5, 'Windows 11 Домашняя S-режим': 5, 'Windows 11 Домашняя': 5, 'Windows 11': 5, 'Windows 10 Pro': 4, 'Windows 10 Домашняя 64': 3, 'Windows 10 Домашняя': 2, 'Linux': 1, 'FreeDOS': 1, 'DOS': 1, 'не установлена': 0}
+proc_dict = {'Intel Core i9': (8, '5 ГГц', '18 МБ'), 'Intel Core i7': (6, '4,7 ГГц', '12 МБ'), 'Intel Core i5': (6, '4,4 ГГц', '12 МБ'), 'Intel Core i3': (4, '4,2 ГГц', '8 МБ'), 'Intel Pentium': (2, '3,5 ГГц', '4 МБ'), 'Intel Celeron': (2, '2,6 ГГц', '2 МБ'), 'AMD Ryzen 7': (8, '4,7 ГГц', '30 МБ'), 'AMD Ryzen 5': (6, '3,7 ГГц', '18 МБ'), 'AMD Ryzen 3': (4, '3,4 ГГц', '12 МБ')}
 
 def string_generator():
     return choice(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'])
@@ -53,7 +54,7 @@ def get_array(f):
     else:
         ntb_lst[8] = 1024 * int(hd_lst[0])
     ntb_lst[9] = os[str(f.o_s)]
-    ntb_lst[10] = int(str(f.core))
+    ntb_lst[10] = int(f.core.cores)
     cache = str(f.cm)
     cache_lst = cache.split()
     ntb_lst[11] = int(cache_lst[0])
