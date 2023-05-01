@@ -10,12 +10,12 @@ class AddNotebookForm(forms.ModelForm):
         model = Notebook
         disp = forms.ModelChoiceField(queryset=Display.objects.all())
         disp_type = forms.ModelChoiceField(queryset=DisplayType.objects.all())
-        proc = forms.ModelChoiceField(queryset=Processor.objects.all())
+        proc_mod = forms.ModelChoiceField(queryset=ProcessorModel.objects.all())
         gc = forms.ModelChoiceField(queryset=GraphicsCard.objects.all())
         r_a_m = forms.ModelChoiceField(queryset=RAM.objects.all())
         hd = forms.ModelChoiceField(queryset=HardDisk.objects.all())
         o_s = forms.ModelChoiceField(queryset=OS.objects.all())
-        fields = ['disp', 'disp_type', 'proc', 'gc', 'r_a_m', 'hd', 'o_s']
+        fields = ['disp', 'disp_type', 'proc_mod', 'gc', 'r_a_m', 'hd', 'o_s']
         widgets = {
             'disp': forms.Select(
                 attrs={'class': 'btn btn-success dropdown-toggle', 'type': 'button', 'data-bs-toggle': 'dropdown',
@@ -23,7 +23,7 @@ class AddNotebookForm(forms.ModelForm):
             'disp_type': forms.Select(
                 attrs={'class': 'btn btn-success dropdown-toggle', 'type': 'button', 'data-bs-toggle': 'dropdown',
                        'aria-expanded': 'false'}),
-            'proc': forms.Select(
+            'proc_mod': forms.Select(
                 attrs={'class': 'btn btn-success dropdown-toggle', 'type': 'button', 'data-bs-toggle': 'dropdown',
                        'aria-expanded': 'false'}),
             'gc': forms.Select(

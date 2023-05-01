@@ -21,9 +21,17 @@ def index_page(request):
         form = AddNotebookForm(request.POST)
         if form.is_valid():
             notebook = form.save(commit=False)
-            notebook.core = Cores.objects.get(cores=proc_dict[str(notebook.proc)][0])
-            notebook.freq = Frequency.objects.get(frequency=proc_dict[str(notebook.proc)][1])
-            notebook.cm = CacheMemory.objects.get(cache_memory=proc_dict[str(notebook.proc)][2])
+            proc_mod_lst = str(notebook.proc_mod).split()
+            if len(proc_mod_lst) == 9:
+                notebook.proc = Processor.objects.get(processor=' '.join(proc_mod_lst[:3]))
+                notebook.core = Cores.objects.get(cores=int(proc_mod_lst[3]))
+                notebook.freq = Frequency.objects.get(frequency=' '.join(proc_mod_lst[5:7]))
+                notebook.cm = CacheMemory.objects.get(cache_memory=' '.join(proc_mod_lst[7:9]))
+            if len(proc_mod_lst) == 8:
+                notebook.proc = Processor.objects.get(processor=' '.join(proc_mod_lst[:2]))
+                notebook.core = Cores.objects.get(cores=int(proc_mod_lst[2]))
+                notebook.freq = Frequency.objects.get(frequency=' '.join(proc_mod_lst[4:6]))
+                notebook.cm = CacheMemory.objects.get(cache_memory=' '.join(proc_mod_lst[6:8]))
             arr = get_array(notebook)
             npp_model5 = torch.jit.load('model5_1_scripted.pt')
             npp_model5.eval()

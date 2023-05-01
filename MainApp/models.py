@@ -72,6 +72,13 @@ class OS(models.Model):
         return self.os
 
 
+class ProcessorModel(models.Model):
+    processor_model = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.processor_model
+
+
 class Notebook(models.Model):
     disp = models.ForeignKey(Display, on_delete=models.PROTECT, null=True, verbose_name='Экран')
     disp_type = models.ForeignKey(DisplayType, on_delete=models.PROTECT, null=True, verbose_name='Тип экрана')
@@ -87,6 +94,7 @@ class Notebook(models.Model):
     creation_date = models.DateTimeField(auto_now=True, verbose_name='Дата создания')
     price = models.PositiveIntegerField(blank=True, verbose_name='Цена')
     discount = models.BooleanField(default=0, verbose_name='Скидка')
+    proc_mod = models.ForeignKey(ProcessorModel, on_delete=models.PROTECT, null=True, verbose_name='Модель процессора')
 
     class Meta:
         ordering = ('price',)
