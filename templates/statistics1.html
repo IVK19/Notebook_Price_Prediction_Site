@@ -1,0 +1,328 @@
+{% extends 'base.html' %}
+{% block scripts %}
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css">
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+{% endblock %}
+{% block content %}
+<main role="main" class="mt-3 flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h1>{{ title }}</h1>
+                <div id="display" style="width: 1200px; height: 700px;">
+
+<py-env>
+- matplotlib
+</py-env>
+<div id="plot">
+<py-script output="plot">
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+par = []
+counts = []
+colors = []
+
+{% for screen in list_screens %}
+par.append('{{ screen.0 }}')
+counts.append({{ screen.1 }})
+colors.append('{{ screen.2 }}')
+{% endfor %}
+
+fig.set_figheight(7)
+fig.set_figwidth(12)
+ax.bar(par, counts, color=colors[0])
+
+ax.set_ylabel('Количество запросов')
+ax.set_title('Дисплеи')
+plt.setp(ax.get_xticklabels(), rotation=20, ha='right')
+plt.grid(True)
+
+fig
+</py-script>
+</div>
+            </div>
+            <div id="display_type" style="width: 1200px; height: 700px;">
+<div id="plot">
+<py-script output="plot">
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+par = []
+counts = []
+colors = []
+
+{% for screen in list_screens_type %}
+par.append('{{ screen.0 }}')
+counts.append({{ screen.1 }})
+colors.append('{{ screen.2 }}')
+{% endfor %}
+
+fig.set_figheight(7)
+fig.set_figwidth(12)
+ax.bar(par, counts, color=colors[0])
+
+ax.set_ylabel('Количество запросов')
+ax.set_title('Типы экранов')
+
+plt.grid(True)
+
+fig
+</py-script>
+</div>
+            </div>
+            <div id="processor" style="width: 1200px; height: 700px;">
+
+<div id="plot">
+<py-script output="plot">
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+par = []
+counts = []
+colors = []
+
+{% for pr in list_prs %}
+par.append('{{ pr.0 }}')
+counts.append({{ pr.1 }})
+colors.append('{{ pr.2 }}')
+{% endfor %}
+
+fig.set_figheight(7)
+fig.set_figwidth(12)
+ax.bar(par, counts, color=colors[0])
+
+ax.set_ylabel('Количество запросов')
+ax.set_title('Процессоры')
+
+plt.grid(True)
+
+fig
+</py-script>
+</div>
+            </div>
+            <div id="cores" style="width: 1200px; height: 700px;">
+
+<div id="plot">
+<py-script output="plot">
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+par = []
+counts = []
+colors = []
+
+{% for cr in list_crs %}
+par.append('{{ cr.0 }}')
+counts.append({{ cr.1 }})
+colors.append('{{ cr.2 }}')
+{% endfor %}
+
+fig.set_figheight(7)
+fig.set_figwidth(12)
+ax.bar(par, counts, color=colors[0])
+
+ax.set_ylabel('Количество запросов')
+ax.set_title('Ядра процессоров')
+
+plt.grid(True)
+
+fig
+</py-script>
+</div>
+            </div>
+            <div id="frequency" style="width: 1200px; height: 700px;">
+
+<div id="plot">
+<py-script output="plot">
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+par = []
+counts = []
+colors = []
+
+{% for fr in list_frs %}
+par.append('{{ fr.0 }}')
+counts.append({{ fr.1 }})
+colors.append('{{ fr.2 }}')
+{% endfor %}
+
+fig.set_figheight(7)
+fig.set_figwidth(12)
+ax.bar(par, counts, color=colors[0])
+
+ax.set_ylabel('Количество запросов')
+ax.set_title('Максимальная тактовая частота процессоров')
+
+plt.grid(True)
+
+fig
+</py-script>
+</div>
+            </div>
+            <div id="graphics_cards" style="width: 2000px; height: 1000px;">
+
+<div id="plot">
+<py-script output="plot">
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+par = []
+counts = []
+colors = []
+
+{% for gr in list_grs %}
+par.append('{{ gr.0 }}')
+counts.append({{ gr.1 }})
+colors.append('{{ gr.2 }}')
+{% endfor %}
+
+fig.set_figheight(10)
+fig.set_figwidth(20)
+ax.bar(par, counts, color=colors[0])
+
+ax.set_ylabel('Количество запросов')
+ax.set_title('Видеокарты')
+plt.setp(ax.get_xticklabels(), rotation=20, ha='right')
+plt.grid(True)
+
+fig
+</py-script>
+</div>
+            </div>
+            <div id="ram" style="width: 1200px; height: 700px;">
+
+<div id="plot">
+<py-script output="plot">
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+par = []
+counts = []
+colors = []
+
+{% for rm in list_rms %}
+par.append('{{ rm.0 }}')
+counts.append({{ rm.1 }})
+colors.append('{{ rm.2 }}')
+{% endfor %}
+
+fig.set_figheight(7)
+fig.set_figwidth(12)
+ax.bar(par, counts, color=colors[0])
+
+ax.set_ylabel('Количество запросов')
+ax.set_title('Оперативная память')
+
+plt.grid(True)
+
+fig
+</py-script>
+</div>
+            </div>
+            <div id="hard_disks" style="width: 1200px; height: 700px;">
+
+<div id="plot">
+<py-script output="plot">
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+par = []
+counts = []
+colors = []
+
+{% for hrd in list_hrds %}
+par.append('{{ hrd.0 }}')
+counts.append({{ hrd.1 }})
+colors.append('{{ hrd.2 }}')
+{% endfor %}
+
+fig.set_figheight(7)
+fig.set_figwidth(12)
+ax.bar(par, counts, color=colors[0])
+
+ax.set_ylabel('Количество запросов')
+ax.set_title('Память жёстких дисков')
+
+plt.grid(True)
+
+fig
+</py-script>
+</div>
+            </div>
+            <div id="cache_memory" style="width: 1200px; height: 700px;">
+
+<div id="plot">
+<py-script output="plot">
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+par = []
+counts = []
+colors = []
+
+{% for cache in list_caches %}
+par.append('{{ cache.0 }}')
+counts.append({{ cache.1 }})
+colors.append('{{ cache.2 }}')
+{% endfor %}
+
+fig.set_figheight(7)
+fig.set_figwidth(12)
+ax.bar(par, counts, color=colors[0])
+
+ax.set_ylabel('Количество запросов')
+ax.set_title('Кэш-память')
+
+plt.grid(True)
+
+fig
+</py-script>
+</div>
+            </div>
+            <div id="os" style="width: 1200px; height: 900px;">
+
+<div id="plot">
+<py-script output="plot">
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+
+par = []
+counts = []
+colors = []
+
+{% for osy in list_osys %}
+par.append('{{ osy.0 }}')
+counts.append({{ osy.1 }})
+colors.append('{{ osy.2 }}')
+{% endfor %}
+
+fig.set_figheight(9)
+fig.set_figwidth(12)
+ax.bar(par, counts, color=colors[0])
+
+ax.set_ylabel('Количество запросов')
+ax.set_title('Операционные системы')
+plt.setp(ax.get_xticklabels(), rotation=20, ha='right')
+plt.grid(True)
+
+fig
+</py-script>
+</div>
+            </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
